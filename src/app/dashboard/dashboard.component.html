@@ -1,0 +1,39 @@
+<div class="container p-3">
+    <div class="row"> 
+        <div class="col">
+            <div class="p-3 add-border">
+                <h5>Period: Year {{year}}</h5>
+                <label for="state" class="mr-3">State</label>
+                <select name="state" id="state" (change)="selectedItem($event.target.value)">
+                    <option value="">State</option>
+                    <option [value]="state.region" *ngFor="let state of healthArray">{{state.region}}</option>
+                </select>
+            </div>
+        </div>    
+    </div>
+    <div class="row" *ngIf="selectedState">
+        <div class="col">
+            <div class="my-5 py-2 px-3 add-border">
+                <h5 class="mb-3">{{selectedState}} Statistics</h5>
+                <div class="row" *ngFor="let item of statisticsArray">
+                    <div class="col-8">
+                        <p>At Least One Measure</p>
+                        <p>Immunization Measure</p>
+                        <p>Reportable Results</p>
+                        <p>Syndromic Measure</p>
+                        <p>Registry Measure</p>
+                    </div>
+                    <div class="col-4">
+                        <p *ngIf="item.atleast_one_measure; else otherContent">{{item.atleast_one_measure}}</p>
+                        <ng-template #otherContent><p>N/A</p></ng-template>
+                        <p>{{item.immunization_measure}}</p>
+                        <p>{{item.reportable_lab_results_measure}}</p>
+                        <p>{{item.syndromic_surveillance_measure}}</p>
+                        <p>{{item.registry_measure}}</p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
